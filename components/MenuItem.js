@@ -1,14 +1,18 @@
 // components/MenuItem.js
 
 export default function MenuItem({ item }) {
-  // Strapi gives us 'attributes' which is where the data is
-  const { name, description, price, image } = item.attributes;
+  // --- THIS IS THE FIRST FIX ---
+  // We remove ".attributes" because your data is flat.
+  const { name, description, price, image } = item;
 
-  // This part is a bit tricky, but it's how we get the image URL.
-  // We check if an image exists before trying to build its URL.
-  const imageUrl = image.data
-    ? `http://127.0.0.1:1337${image.data.attributes.url}`
-    : null;
+  // --- THIS IS THE SECOND FIX ---
+  // We get the live Strapi URL from the environment
+  const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_API_URL || 'http://127.0.0.1:1337';
+
+  // --- THIS IS THE THIRD FIX ---
+  // We simplify the image URL logic to match your API's JSON
+  // We check if 'image' exists, and if so, use 'image.url'
+  const imageUrl = image ? `${strapiUrl}${image.url}` : null;
 
   return (
     <div className="menu-item-card">
@@ -26,18 +30,18 @@ export default function MenuItem({ item }) {
           background: #ffffff;
           border-radius: 8px;
           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-          overflow: hidden; /* This keeps the image corners rounded */
+          overflow: hidden; 
           display: flex;
-          flex-direction: column; /* Lays out content, then price */
+          flex-direction: column; 
         }
         .item-image {
           width: 100%;
           height: 180px;
-          object-fit: cover; /* This scales the image nicely */
+          object-fit: cover; 
         }
         .item-content {
           padding: 15px;
-          flex-grow: 1; /* This makes the content fill available space */
+          flex-grow: 1; 
         }
         .item-name {
           font-size: 1.25rem;
