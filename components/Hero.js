@@ -1,56 +1,52 @@
 // components/Hero.js
-export default function Hero() {
-  // You can get a good hero image from a free site like unsplash.com
-  // or upload your best pizza photo to your Strapi admin
-  const heroImageUrl = 'https://placehold.co/1200x400/d92027/ffffff?text=Your+Best+Pizza+Deal';
 
+export default function Hero() {
   return (
     <div className="hero-container">
-      {/* This is a simple way to have a background image.
-        For a real image, use a URL from your admin.
-      */}
-      <style jsx>{`
-        .hero-container {
-          background-color: #222; /* Fallback color */
-          background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${heroImageUrl});
-          background-size: cover;
-          background-position: center;
-          padding: 60px 20px;
-          text-align: center;
-          color: white;
-          border-radius: 8px;
-          margin-bottom: 40px;
-        }
-        .hero-content h1 {
-          font-size: 3rem;
-          margin: 0 0 10px 0;
-        }
-        .hero-content p {
-          font-size: 1.25rem;
-          margin-bottom: 30px;
-        }
-        .hero-button {
-          background-color: #d92027; /* Red */
-          color: white;
-          padding: 12px 25px;
-          text-decoration: none;
-          font-weight: bold;
-          border-radius: 5px;
-          font-size: 1.1rem;
-          transition: background-color 0.2s;
-        }
-        .hero-button:hover {
-          background-color: #a6131a;
-        }
-      `}</style>
-
       <div className="hero-content">
-        <h1>Bite Into Happiness</h1>
-        <p>Serving Las Vegas' best pizza, pasta, and subs.</p>
+        <h1 className="hero-title">Bite Into Happiness</h1>
+        <p className="hero-subtitle">
+          Authentic Italian flavors, delivered right to your door.
+        </p>
         <a href="#menu" className="hero-button">
           View Full Menu
         </a>
       </div>
+
+      <style jsx>{`
+        .hero-container {
+          background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+            url('/hero-background.jpg'); /* Make sure you have this image in /public */
+          background-size: cover;
+          background-position: center;
+          padding: 100px 20px;
+          text-align: center;
+          color: white;
+          border-radius: 12px;
+          margin-bottom: 40px;
+        }
+        .hero-title {
+          font-size: 3.5rem;
+          font-weight: bold;
+          margin: 0;
+        }
+        .hero-subtitle {
+          font-size: 1.25rem;
+          margin: 15px 0 30px 0;
+        }
+        .hero-button {
+          background-color: #d92027; /* Red */
+          color: white;
+          padding: 15px 30px;
+          border-radius: 30px;
+          text-decoration: none;
+          font-weight: bold;
+          transition: background-color 0.2s;
+        }
+        .hero-button:hover {
+          background-color: #b81a21; /* Darker Red */
+        }
+      `}</style>
     </div>
   );
 }
