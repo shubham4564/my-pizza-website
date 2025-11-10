@@ -5,7 +5,7 @@ import MenuCategory from '../components/MenuCategory';
 
 // This function is perfect and does not need to change.
 export async function getStaticProps() {
-  const strapiUrl = 'http://127.0.0.1:1337';
+  const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_API_URL || 'http://127.0.0.1:1337';
   const res = await fetch(`${strapiUrl}/api/menu-items?populate=*`);
   const { data } = await res.json();
 
