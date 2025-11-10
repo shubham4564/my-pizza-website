@@ -11,43 +11,37 @@ import MenuCategory from '../components/MenuCategory';
 // ... keep your 'Home' component at the bottom ...
 
 // This is your NEW, highly-robust data fetching function
+// This is the final version. It works both locally and on Vercel.
 export async function getStaticProps() {
   
-  // 1. Get the API URL from Vercel's environment variables
-  const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_API_URL;
-  let groupedMenu = {}; // Start with an empty menu
-
-  // 2. Check if the URL is even set
-  if (!strapiUrl) {
-    console.error("Error: NEXT_PUBLIC_STRAPI_API_URL is not set in Vercel.");
-    return { props: { groupedMenu }, revalidate: 10 };
+  // THIS IS THE FIX: We add a fallback to your local Strapi server
+  const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_API_URL || 'http://127.0.0.1:1337';
+  
+  // This will just warn you locally, not log a scary error
+  if (!process.env.NEXT_PUBLIC_STRAPI_API_URL) {
+    console.warn("Warning: NEXT_PUBLIC_STRAPI_API_URL not set. Using local fallback 'http://127.0.0.1:1337'.");
   }
   
   const apiUrl = `${strapiUrl}/api/menu-items?populate=*`;
   console.log(`Attempting to fetch data from: ${apiUrl}`);
+  
+  let groupedMenu = {}; // Start with an empty menu
 
   try {
-    // 3. Try to fetch the data
     const res = await fetch(apiUrl);
 
     if (!res.ok) {
-      // 4. If the server responds with an error (like 403, 404, 500)
       console.error(`API fetch failed with status: ${res.status}`);
       throw new Error(`Failed to fetch API: ${res.status}`);
     }
 
-    // 5. If successful, parse the JSON
     const jsonResponse = await res.json();
-    
-    // 6. The data is in a property called 'data'
     const data = jsonResponse.data;
 
-    // 7. Check if 'data' is a valid array
     if (data && Array.isArray(data)) {
       console.log(`Successfully fetched ${data.length} menu items.`);
       data.forEach((item) => {
         if (item) {
-          // We read 'item.category' directly (no .attributes)
           const category = item.category || 'Other'; 
           if (!groupedMenu[category]) {
             groupedMenu[category] = [];
@@ -56,22 +50,19 @@ export async function getStaticProps() {
         }
       });
     } else {
-      // 8. The API responded, but 'data' was not an array
-      console.warn("API response was OK, but 'data' property was not an array.");
-      console.warn("API Response:", jsonResponse);
+      console.warn("API response was OK, but 'data' was not an array.");
     }
     
   } catch (error) {
-    // 9. This catches network errors or JSON parsing errors
     console.error("A critical error occurred in getStaticProps:", error.message);
   }
 
-  // 10. Always return the menu (even if it's empty) so the page can build
+  // Always return the menu (even if it's empty) so the page can build
   return {
     props: {
       groupedMenu,
     },
-    revalidate: 10, // Tell Vercel to re-fetch every 10 seconds
+    revalidate: 10,
   };
 }
 
