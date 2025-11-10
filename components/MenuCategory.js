@@ -31,9 +31,16 @@ export default function MenuCategory({ name, items }) {
         .items-grid {
           display: grid;
           gap: 25px;
-          /* This creates a responsive grid that automatically adjusts the number of columns
-             based on the available width. Each item will be at least 300px wide. */
-          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+          align-items: stretch;
+        }
+
+        /* Ensure single items don't become overly wide on huge screens */
+        @media (min-width: 1200px) {
+          .items-grid { 
+            max-width: 1100px; /* Keeps cards from stretching too far */
+            margin: 0 auto; /* Center the grid */
+          }
         }
       `}</style>
     </section>

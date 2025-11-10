@@ -101,35 +101,7 @@ export default function Home({ groupedMenu = {} }) {
         </main>
       </div>
 
-      {/* 7. We add styles for the new tab buttons */}
-      <style jsx>{`
-        .tabs-container {
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: center;
-          gap: 10px;
-          margin-bottom: 40px;
-        }
-        .tab-button {
-          padding: 10px 20px;
-          font-size: 1rem;
-          font-weight: 600;
-          color: #333;
-          background-color: #eee;
-          border: 1px solid #ddd;
-          border-radius: 30px; /* Pill shape */
-          cursor: pointer;
-          transition: all 0.2s;
-        }
-        .tab-button:hover {
-          background-color: #ddd;
-        }
-        .tab-button.active {
-          background-color: #d92027; /* Red */
-          color: white;
-          border-color: #d92027;
-        }
-      `}</style>
+      {/* Tabs styles moved to global stylesheet */}
     </Layout>
   );
 }

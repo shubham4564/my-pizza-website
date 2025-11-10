@@ -14,6 +14,9 @@ export default function MenuItem({ item }) {
   // We check if 'image' exists, and if so, use 'image.url'
   const imageUrl = image ? `${strapiUrl}${image.url}` : null;
 
+  // Guard for price values that may be strings or undefined
+  const priceNumber = typeof price === 'number' ? price : parseFloat(price);
+
   return (
     <div className="menu-item-card">
       {imageUrl && (
@@ -23,7 +26,9 @@ export default function MenuItem({ item }) {
         <h4 className="item-name">{name}</h4>
         <p className="item-description">{description}</p>
       </div>
-      <div className="item-price">${price.toFixed(2)}</div>
+      {Number.isFinite(priceNumber) && (
+        <div className="item-price">${priceNumber.toFixed(2)}</div>
+      )}
 
       <style jsx>{`
         .menu-item-card {
@@ -33,6 +38,9 @@ export default function MenuItem({ item }) {
           overflow: hidden; 
           display: flex;
           flex-direction: column; 
+          width: 100%;
+          max-width: 520px; /* prevent over-wide single cards */
+          margin: 0 auto; /* center within grid cell */
         }
         .item-image {
           width: 100%;
