@@ -30,16 +30,10 @@ export default function MenuCategory({ name, items }) {
         }
         .items-grid {
           display: grid;
-          /* This is responsive! 1 column on mobile, 2 on tablet+ */
-          grid-template-columns: 1fr;
           gap: 25px;
-        }
-
-        /* On screens wider than 768px, use 2 columns */
-        @media (min-width: 768px) {
-          .items-grid {
-            grid-template-columns: 1fr 1fr;
-          }
+          /* This creates a responsive grid that automatically adjusts the number of columns
+             based on the available width. Each item will be at least 300px wide. */
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         }
       `}</style>
     </section>
