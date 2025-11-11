@@ -10,13 +10,13 @@ export default function Footer() {
         <div className="footer-section">
           <h4>Contact Us</h4>
           <p>702-876-3999</p>
-          <p>123 Pizza St,<br />Las Vegas, NV 89100</p>
+          <p>3711 S Valley View Blvd,<br />Las Vegas, NV 89103</p>
         </div>
         <div className="footer-section">
           <h4>Hours</h4>
           <p>
-            Mon - Thu: 11:00 AM - 10:00 PM<br />
-            Fri - Sun: 11:00 AM - 11:00 PM
+            Mon - Thu: 11:00 AM - 11:30 PM<br />
+            Fri - Sun: 11:00 AM - 11:30 PM
           </p>
         </div>
       </div>
