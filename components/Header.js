@@ -3,17 +3,22 @@ import Link from 'next/link';
 
 export default function Header() {
   // We'll link the "Order Now" to an external site, or you can make an /order page later
-  const orderOnlineUrl = 'https://www.your-online-order-link.com'; // Replace this
-  const googleMapsUrl = 'https://goo.gl/maps/YOUR_GOOGLE_MAPS_LINK'; // Replace this
+  const orderOnlineUrl = 'https://slicelife.com/restaurants/nv/las-vegas/89103/little-italy-pizza-3711-s-valley-view-blvd-las-vegas/menu?utm_campaign=order_now_button&utm_medium=referral&utm_source=littleitalypizzalv.com&utm_content=custom_link';
+  const googleMapsUrl = 'https://maps.app.goo.gl/eP2fPbs9wYzh5Ckm7';
 
   return (
     <header className="header-container">
       <div className="header-content">
         <div className="branding">
           <Link href="/">
-            <span className="brand-title">Little Italy Pizza</span>
+            <div className="brand-logo-section">
+              <img src="/logo.png" alt="Little Italy Pizza Logo" className="brand-logo" />
+              <div className="brand-text">
+                <span className="brand-title">Little Italy Pizza</span>
+                <span className="brand-phone">702-876-3999</span>
+              </div>
+            </div>
           </Link>
-          <span className="brand-phone">702-876-3999</span>
         </div>
         <nav className="header-nav">
           <a href={googleMapsUrl} target="_blank" rel="noopener noreferrer" className="nav-link">
@@ -46,12 +51,26 @@ export default function Header() {
           display: flex;
           flex-direction: column;
         }
+        .brand-logo-section {
+          display: flex;
+          align-items: center;
+          gap: 15px;
+          cursor: pointer;
+        }
+        .brand-logo {
+          width: 50px;
+          height: 50px;
+          object-fit: contain;
+        }
+        .brand-text {
+          display: flex;
+          flex-direction: column;
+        }
         .brand-title {
           font-size: 1.75rem;
           font-weight: bold;
           color: #d92027; /* Red */
           text-decoration: none;
-          cursor: pointer;
         }
         .brand-phone {
           font-size: 1rem;

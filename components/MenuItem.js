@@ -29,47 +29,6 @@ export default function MenuItem({ item }) {
       {Number.isFinite(priceNumber) && (
         <div className="item-price">${priceNumber.toFixed(2)}</div>
       )}
-
-      <style jsx>{`
-        .menu-item-card {
-          background: #ffffff;
-          border-radius: 8px;
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-          overflow: hidden; 
-          display: flex;
-          flex-direction: column; 
-          width: 100%;
-          max-width: 520px; /* prevent over-wide single cards */
-          margin: 0 auto; /* center within grid cell */
-        }
-        .item-image {
-          width: 100%;
-          height: 180px;
-          object-fit: cover; 
-        }
-        .item-content {
-          padding: 15px;
-          flex-grow: 1; 
-        }
-        .item-name {
-          font-size: 1.25rem;
-          font-weight: bold;
-          margin: 0 0 10px 0;
-        }
-        .item-description {
-          font-size: 0.9rem;
-          color: #555;
-          margin: 0;
-        }
-        .item-price {
-          font-size: 1.25rem;
-          font-weight: bold;
-          color: #d92027; /* Little Italy Red */
-          padding: 15px;
-          border-top: 1px solid #f0f0f0;
-          text-align: right;
-        }
-      `}</style>
     </div>
   );
 }
